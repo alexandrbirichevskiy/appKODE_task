@@ -57,6 +57,11 @@ class ListFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     fun loadData() {
         userItemsRepo = app.usersItemsRepo
         userItemsRepo.getUsersItems({
@@ -66,10 +71,5 @@ class ListFragment : Fragment() {
             Log.d("@@@", "Error! ${throwable.message}")
             Toast.makeText(context, "Error! ${throwable.message}", Toast.LENGTH_SHORT).show()
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

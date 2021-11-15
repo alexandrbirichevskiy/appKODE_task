@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alexbirichevskiy.appkodetask.Consts.ARG_TAG
 import com.alexbirichevskiy.appkodetask.Consts.tabValue
 
-class RecyclerViewAdapter(fragment: FragmentActivity): FragmentStateAdapter(fragment) {
+class RecyclerViewAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return tabValue.size
     }

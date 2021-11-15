@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alexbirichevskiy.appkodetask.Consts.USER_TAG
-import com.alexbirichevskiy.appkodetask.R
 import com.alexbirichevskiy.appkodetask.databinding.FragmentProfileBinding
 import com.alexbirichevskiy.appkodetask.domain.entities.UserItemEntity
 import com.bumptech.glide.Glide
