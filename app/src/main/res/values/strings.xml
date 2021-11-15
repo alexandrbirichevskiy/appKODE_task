@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppKodeTask</string>
+    <string name="search_plug_edit_text">Тут должен быть поиск</string>
 </resources>
