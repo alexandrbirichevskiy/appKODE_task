@@ -12,8 +12,7 @@ class CombinedUsersItemsRepoImpl(
     retrofit: Retrofit,
     dao: UsersItemsDao,
     handler: Handler
-) :
-    UsersItemsRepo {
+) : UsersItemsRepo {
     private val webRepo = WebUsersItemsRepoImpl(retrofit)
     private val cacheRepo = RoomKodeUsersItemsRepoImpl(dao, handler)
 

@@ -1,22 +1,73 @@
 package com.alexbirichevskiy.appkodetask.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.alexbirichevskiy.appkodetask.Consts.ARG_TAG
-import com.alexbirichevskiy.appkodetask.Consts.tabValue
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.alexbirichevskiy.appkodetask.Consts.USER_TAG
+import com.alexbirichevskiy.appkodetask.R
+import com.alexbirichevskiy.appkodetask.databinding.UserItemBinding
+import com.alexbirichevskiy.appkodetask.domain.entities.UserItemEntity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
-class RecyclerViewAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int {
-        return tabValue.size
+class RecyclerViewAdapter(
+    private val users: List<UserItemEntity>,
+    private val depart: String?,
+    val fragmentT: UsersFragment
+) : RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
+        return RecyclerViewViewHolder(parent, fragmentT)
     }
 
-    override fun createFragment(position: Int): Fragment {
-        val fragment = ListFragment()
-        fragment.arguments = Bundle().apply {
-            putString(ARG_TAG, tabValue[position])
+    override fun onBindViewHolder(holder: RecyclerViewViewHolder, position: Int) {
+        holder.bind(filterByDepartData(depart)[position])
+    }
+
+    override fun getItemCount(): Int {
+        return filterByDepartData(depart).size
+    }
+
+    private fun filterByDepartData(depart: String?): MutableList<UserItemEntity> {
+        return if (depart == "all") {
+            users.toMutableList()
+        } else {
+            val list = emptyList<UserItemEntity>().toMutableList()
+            for (i in users) {
+                if (i.department == depart) {
+                    list.add(i)
+                }
+            }
+            list
         }
-        return fragment
+    }
+
+    inner class RecyclerViewViewHolder(parent: ViewGroup, val fragmentT: UsersFragment) :
+        RecyclerView.ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
+        ) {
+        private val binding: UserItemBinding = UserItemBinding.bind(itemView)
+
+        fun bind(UserItemEntity: UserItemEntity) {
+            binding.fullNameTextView.text =
+                "${UserItemEntity.firstName} ${UserItemEntity.lastName}"
+            binding.departmentTextView.text = UserItemEntity.position
+            binding.userTagTextView.text = UserItemEntity.userTagLower
+            Glide.with(binding.root).load(UserItemEntity.avatarUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.avatarImageView)
+
+            val fragment = ProfileFragment()
+
+            fragment.arguments = Bundle().apply {
+                putParcelable(USER_TAG, UserItemEntity)
+            }
+
+            itemView.setOnClickListener {
+                fragmentT.activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.activity_layout, fragment)?.addToBackStack("lol")?.commit()
+            }
+        }
     }
 }

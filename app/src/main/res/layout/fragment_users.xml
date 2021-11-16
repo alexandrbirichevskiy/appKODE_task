@@ -4,7 +4,7 @@
     android:id="@+id/swipe_refrash_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ListFragment">
+    tools:context=".ui.UsersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
