@@ -21,7 +21,7 @@
 
     <style name="title">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#050510</item>
+        <item name="android:textColor">@color/title_color_text_view</item>
     </style>
 
     <style name="al">
@@ -37,5 +37,20 @@
     <style name="detail">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#97979B</item>
+    </style>
+
+    <style name="server_error_title">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/title_color_text_view</item>
+    </style>
+
+    <style name="server_error_headline">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#97979B</item>
+    </style>
+
+    <style name="server_error_refresh">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#6534FF</item>
     </style>
 </resources>

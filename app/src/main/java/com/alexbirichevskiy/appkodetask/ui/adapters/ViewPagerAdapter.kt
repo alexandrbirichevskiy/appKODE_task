@@ -1,4 +1,4 @@
-package com.alexbirichevskiy.appkodetask.ui
+package com.alexbirichevskiy.appkodetask.ui.adapters
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alexbirichevskiy.appkodetask.Consts.ARG_TAG
 import com.alexbirichevskiy.appkodetask.Consts.tabValue
+import com.alexbirichevskiy.appkodetask.ui.fragments.UsersFragment
 
 class ViewPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {

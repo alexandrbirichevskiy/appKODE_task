@@ -1,13 +1,16 @@
-package com.alexbirichevskiy.appkodetask.ui
+package com.alexbirichevskiy.appkodetask.ui.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.alexbirichevskiy.appkodetask.Consts.PROFILE_FRAGMENT_TAG
 import com.alexbirichevskiy.appkodetask.Consts.USER_TAG
 import com.alexbirichevskiy.appkodetask.R
 import com.alexbirichevskiy.appkodetask.databinding.UserItemBinding
 import com.alexbirichevskiy.appkodetask.domain.entities.UserItemEntity
+import com.alexbirichevskiy.appkodetask.ui.fragments.ProfileFragment
+import com.alexbirichevskiy.appkodetask.ui.fragments.UsersFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -66,7 +69,8 @@ class RecyclerViewAdapter(
 
             itemView.setOnClickListener {
                 fragmentT.activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.activity_layout, fragment)?.addToBackStack("lol")?.commit()
+                    ?.replace(R.id.activity_layout, fragment)?.addToBackStack(PROFILE_FRAGMENT_TAG)
+                    ?.commit()
             }
         }
     }

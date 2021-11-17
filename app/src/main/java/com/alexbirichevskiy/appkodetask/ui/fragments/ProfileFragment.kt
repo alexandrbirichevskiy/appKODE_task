@@ -1,4 +1,4 @@
-package com.alexbirichevskiy.appkodetask.ui
+package com.alexbirichevskiy.appkodetask.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -13,10 +13,14 @@ import com.alexbirichevskiy.appkodetask.domain.entities.UserItemEntity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ProfileFragment : Fragment() {
-
     private lateinit var profile: UserItemEntity
+
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -36,7 +40,6 @@ class ProfileFragment : Fragment() {
                 profile = requireArguments().getParcelable(USER_TAG)!!
                 binding.fullNameProfileTextView.text = "${profile.firstName} ${profile.lastName}"
                 binding.phoneProfileTextView.text = profile.phone
-
                 binding.birthdayProfileTextView.text = SimpleDateFormat("dd MMMM yyyy").format(
                     SimpleDateFormat("yyyy-mm-dd").parse(profile.birthday)
                 )
@@ -47,11 +50,16 @@ class ProfileFragment : Fragment() {
                     .into(binding.avatarProfileImageView)
             }
         }
+
         binding.phoneProfileTextView.setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL)
             val uri = "tel:" + binding.phoneProfileTextView.text
             intent.setData(Uri.parse(uri))
             activity?.startActivity(intent)
+        }
+
+        binding.icArrowLeftImageView.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
         }
     }
 

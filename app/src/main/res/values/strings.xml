@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AppKodeTask</string>
     <string name="search_plug_edit_text">Тут должен быть поиск</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="server_error_title_text">Какой-то сверхразум все сломал</string>
+    <string name="server_error_headline_text">Постараемся быстро починить</string>
+    <string name="server_error_refresh_text">Попробовать снова</string>
 </resources>

@@ -3,6 +3,7 @@ package com.alexbirichevskiy.appkodetask
 object Consts {
     const val ARG_TAG = "ARG_TAG"
     const val USER_TAG = "USER_TAG"
+    const val PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG"
 
     val tabName = listOf<String>(
         "Все",

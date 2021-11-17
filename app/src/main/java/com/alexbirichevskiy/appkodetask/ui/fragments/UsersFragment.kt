@@ -1,4 +1,4 @@
-package com.alexbirichevskiy.appkodetask.ui
+package com.alexbirichevskiy.appkodetask.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,15 +10,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexbirichevskiy.appkodetask.Consts.ARG_TAG
 import com.alexbirichevskiy.appkodetask.databinding.FragmentUsersBinding
+import com.alexbirichevskiy.appkodetask.domain.entities.UserItemEntity
+import com.alexbirichevskiy.appkodetask.ui.RecyclerViewClickListener
+import com.alexbirichevskiy.appkodetask.ui.view_models.UsersViewModel
+import com.alexbirichevskiy.appkodetask.ui.view_models.UsersViewModelFactory
+import com.alexbirichevskiy.appkodetask.ui.adapters.RecyclerViewAdapter
 
-class UsersFragment : Fragment() {
-
+class UsersFragment : Fragment(), RecyclerViewClickListener {
     private lateinit var usersViewModel: UsersViewModel
+
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
-
     private var department: String? = null
 
     override fun onCreateView(
@@ -39,10 +41,9 @@ class UsersFragment : Fragment() {
             }
         }
 
-
         binding.swipeRefrashContainer.setOnRefreshListener {
             binding.swipeRefrashContainer.isRefreshing = true
-//            loadData(app.usersItemsRepo)
+            onRefresh()
             binding.swipeRefrashContainer.isRefreshing = false
         }
     }
@@ -52,8 +53,15 @@ class UsersFragment : Fragment() {
         usersViewModel =
             ViewModelProvider(this, UsersViewModelFactory(context))[UsersViewModel::class.java]
 
-        usersViewModel.getUsers()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun onRefresh(){
+        usersViewModel.getUsers()
         usersViewModel.users.observe(viewLifecycleOwner, Observer { users ->
             binding.recyclerView.also {
                 it.layoutManager = LinearLayoutManager(context)
@@ -63,8 +71,7 @@ class UsersFragment : Fragment() {
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onRecyclerViewClickListener(view: View, user: UserItemEntity) {
+//            todo
     }
 }

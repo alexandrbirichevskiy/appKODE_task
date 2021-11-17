@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="bottom"
-                    android:textColor="@color/full_name_color_text_view"
+                    android:textColor="@color/title_color_text_view"
                     android:textSize="@dimen/full_name_sizer_text_view" />
 
                 <TextView

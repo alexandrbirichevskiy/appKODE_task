@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="horizontal"
-    tools:context=".ui.ProfileFragment">
+    tools:context=".ui.fragments.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame_3214"
@@ -21,8 +21,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/avatar_profile_image_view"
-            android:layout_width="104sp"
-            android:layout_height="104sp"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toTopOf="@+id/full_name_profile_text_view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +79,16 @@
             app:layout_constraintTop_toBottomOf="@+id/full_name_profile_text_view"
             tools:text="Designer" />
 
+        <ImageView
+            android:id="@+id/ic_arrow_left_image_view"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/ic_arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -96,14 +106,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="28dp"
         android:gravity="bottom"
         android:lineSpacingExtra="1sp"
         android:textAppearance="@style/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ic_favorite_image_view"
         app:layout_constraintTop_toBottomOf="@+id/spacing_div"
         app:layout_goneMarginTop="27dp"
         tools:text="5 июня 1996" />
@@ -130,15 +140,37 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="52dp"
         android:gravity="bottom"
         android:lineSpacingExtra="1sp"
         android:textAppearance="@style/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ic_phone_image_view"
         app:layout_constraintTop_toBottomOf="@+id/birthday_profile_text_view"
         tools:text="+7(999) 900 90 90" />
+
+    <ImageView
+        android:id="@+id/ic_favorite_image_view"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/ic_favorite"
+        app:layout_constraintEnd_toStartOf="@+id/birthday_profile_text_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spacing_div" />
+
+    <ImageView
+        android:id="@+id/ic_phone_image_view"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ic_phone"
+        app:layout_constraintEnd_toStartOf="@+id/phone_profile_text_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_favorite_image_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

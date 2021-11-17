@@ -1,4 +1,4 @@
-package com.alexbirichevskiy.appkodetask.ui
+package com.alexbirichevskiy.appkodetask.ui.view_models
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -16,7 +16,8 @@ class UsersViewModel(private val usersItems: UsersItemsRepo) : ViewModel() {
     fun getUsers() {
         val users = usersItems.getUsersItems({
             _users.value = it
-        }, {throwable ->
-            Log.d("@@@", "Error! ${throwable.message}")})
+        }, { throwable ->
+            Log.d("@@@", "Error! ${throwable.message}")
+        })
     }
 }
