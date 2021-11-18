@@ -13,10 +13,6 @@ import com.alexbirichevskiy.appkodetask.domain.entities.UserItemEntity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class ProfileFragment : Fragment() {
     private lateinit var profile: UserItemEntity
