@@ -7,17 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexbirichevskiy.appkodetask.Consts.ARG_TAG
-import com.alexbirichevskiy.appkodetask.MyApplication
 import com.alexbirichevskiy.appkodetask.databinding.FragmentUsersBinding
-import com.alexbirichevskiy.appkodetask.ui.MainActivity
 import com.alexbirichevskiy.appkodetask.ui.view_models.UsersViewModel
-import com.alexbirichevskiy.appkodetask.ui.view_models.UsersViewModelFactory
 import com.alexbirichevskiy.appkodetask.ui.adapters.RecyclerViewAdapter
 
 class UsersFragment : Fragment() {
@@ -33,6 +27,7 @@ class UsersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -45,29 +40,21 @@ class UsersFragment : Fragment() {
             }
         }
 
-        binding.swipeRefrashContainer.setOnRefreshListener {
-            binding.swipeRefrashContainer.isRefreshing = true
-            onRefresh()
-            binding.swipeRefrashContainer.isRefreshing = false
-        }
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.setHasFixedSize(true)
-        usersViewModel.getUsers()
 
-        usersViewModel.searchText.observe(viewLifecycleOwner, { msg ->
-            usersViewModel.users.observe(viewLifecycleOwner, Observer { users ->
-                binding.recyclerView.also { recyclerView ->
-                    val adapter = RecyclerViewAdapter(users.toMutableList(), department, this)
-                    adapter.filter.filter(msg)
-                    recyclerView.adapter = adapter
-                }
-            })
-        })
-    }
+        val loadData = loadData()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        if (loadData) {
+            loadSearchText()
+        }
 
+        binding.swipeRefrashContainer.setOnRefreshListener {
+            binding.swipeRefrashContainer.isRefreshing = true
+            usersViewModel.getUsers()
+            loadData()
+            binding.swipeRefrashContainer.isRefreshing = false
+        }
     }
 
     override fun onDestroyView() {
@@ -75,15 +62,17 @@ class UsersFragment : Fragment() {
         _binding = null
     }
 
-    private fun onRefresh() {
-        usersViewModel.getUsers()
-        usersViewModel.users.observe(viewLifecycleOwner, Observer { users ->
-            binding.recyclerView.also { recyclerView ->
-                recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.setHasFixedSize(true)
-                val adapter = RecyclerViewAdapter(users.toMutableList(), department, this)
-                recyclerView.adapter = adapter
-            }
+    private fun loadData(): Boolean {
+        val adapter =
+            RecyclerViewAdapter(usersViewModel.users.value!!.toMutableList(), department, this)
+        binding.recyclerView.adapter = adapter
+        return true
+    }
+
+    private fun loadSearchText() {
+        usersViewModel.searchText.observe(viewLifecycleOwner, { msg ->
+            val myAdapter = binding.recyclerView.adapter as RecyclerViewAdapter
+            myAdapter.filter.filter(msg)
         })
     }
 }

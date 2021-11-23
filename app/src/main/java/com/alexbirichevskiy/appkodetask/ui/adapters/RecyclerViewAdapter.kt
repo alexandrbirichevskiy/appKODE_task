@@ -1,6 +1,7 @@
 package com.alexbirichevskiy.appkodetask.ui.adapters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -23,7 +24,7 @@ class RecyclerViewAdapter(
     val fragmentT: UsersFragment
 ) : RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewViewHolder>(), Filterable {
 
-    private var usersAll = users
+    private var usersAll = users.toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         return RecyclerViewViewHolder(parent, fragmentT)
@@ -58,9 +59,14 @@ class RecyclerViewAdapter(
             val filteredList = emptyList<UserItemEntity>().toMutableList()
             if (p0.toString().isEmpty()) {
                 filteredList.addAll(usersAll)
+                Log.d("@@@", true.toString())
             } else {
                 for (users in usersAll) {
                     if (users.firstName.toString().lowercase(Locale.getDefault())
+                            .contains(p0.toString().lowercase(Locale.getDefault()))
+                        || users.lastName.toString().lowercase(Locale.getDefault())
+                            .contains(p0.toString().lowercase(Locale.getDefault()))
+                        || users.userTag.toString().lowercase(Locale.getDefault())
                             .contains(p0.toString().lowercase(Locale.getDefault()))
                     ) {
                         filteredList.add(users)

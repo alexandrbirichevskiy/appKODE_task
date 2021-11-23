@@ -24,14 +24,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         pagerAdapter = ViewPagerAdapter(this)
-        binding.viewPager.adapter = pagerAdapter
+
 
         usersVM = ViewModelProvider(this, UsersViewModelFactory(this))[UsersViewModel::class.java]
-        Log.d("456", "MainActivity $usersVM")
+        usersVM.getUsers()
+        Log.d("@@@", "Create Activity")
 
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = tabName[position]
-        }.attach()
+        Thread{
+            Thread.sleep(5_000)
+            Log.d("@@@", "users " + usersVM.users.value.toString())
+            runOnUiThread{
+                binding.viewPager.adapter = pagerAdapter
+                binding.viewPager.offscreenPageLimit = 1
+                TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+                    tab.text = tabName[position]
+                }.attach()
+            }
+        }.start()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -45,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 usersVM.searchText.value = newText
-                Log.d("123", "Main $newText")
                 return false
             }
         })

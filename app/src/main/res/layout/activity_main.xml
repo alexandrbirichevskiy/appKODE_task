@@ -10,12 +10,15 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
+        style="@style/tab_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         app:tabGravity="center"
         app:tabIndicatorAnimationDuration="700"
-        app:tabMode="scrollable" />
+        app:tabIndicatorColor="#6534FF"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
