@@ -22,31 +22,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.shimmerFrameLayout.startShimmer()
 
         pagerAdapter = ViewPagerAdapter(this)
 
-
         usersVM = ViewModelProvider(this, UsersViewModelFactory(this))[UsersViewModel::class.java]
         usersVM.getUsers()
-        Log.d("@@@", "Create Activity")
 
-
-        binding.shimmerFrameLayout.stopShimmer()
-
-
-        Thread {
-            Thread.sleep(5_000)
-            Log.d("@@@", "users " + usersVM.users.value.toString())
-            runOnUiThread {
-                binding.shimmerFrameLayout.stopShimmer()
-                binding.shimmerFrameLayout.removeAllViews()
-                binding.viewPager.adapter = pagerAdapter
-                binding.viewPager.offscreenPageLimit = 1
-                TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                    tab.text = tabName[position]
-                }.attach()
-            }
-        }.start()
+        usersVM.users.observe(this) {
+            binding.shimmerFrameLayout.stopShimmer()
+            binding.shimmerFrameLayout.removeAllViews()
+            binding.viewPager.adapter = pagerAdapter
+            binding.viewPager.offscreenPageLimit = 1
+            TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+                tab.text = tabName[position]
+            }.attach()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
