@@ -30,10 +30,16 @@ class MainActivity : AppCompatActivity() {
         usersVM.getUsers()
         Log.d("@@@", "Create Activity")
 
-        Thread{
+
+        binding.shimmerFrameLayout.stopShimmer()
+
+
+        Thread {
             Thread.sleep(5_000)
             Log.d("@@@", "users " + usersVM.users.value.toString())
-            runOnUiThread{
+            runOnUiThread {
+                binding.shimmerFrameLayout.stopShimmer()
+                binding.shimmerFrameLayout.removeAllViews()
                 binding.viewPager.adapter = pagerAdapter
                 binding.viewPager.offscreenPageLimit = 1
                 TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->

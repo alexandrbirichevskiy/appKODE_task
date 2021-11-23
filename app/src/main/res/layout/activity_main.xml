@@ -6,19 +6,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        style="@style/tab_style"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="60dp"
         app:tabGravity="center"
         app:tabIndicatorAnimationDuration="700"
         app:tabIndicatorColor="#6534FF"
         app:tabIndicatorHeight="2dp"
-        app:tabMode="scrollable"/>
+        app:tabMode="scrollable" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+            <include layout="@layout/user_item_shimmer" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
