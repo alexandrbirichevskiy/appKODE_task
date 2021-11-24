@@ -17,22 +17,30 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <CheckBox
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:button="@android:drawable/btn_radio"
-        android:paddingStart="14dp"
-        android:text="По алфавиту"
-        android:textSize="16sp" />
+        android:layout_weight="2">
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:button="@android:drawable/btn_radio"
-        android:paddingStart="14dp"
-        android:text="По дню рождения"
-        android:textSize="16sp" />
+        <RadioButton
+            android:id="@+id/sort_alpha_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#6534FF"
+            android:paddingStart="14dp"
+            android:text="По алфавиту"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/sort_birth_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:buttonTint="#6534FF"
+            android:paddingStart="14dp"
+            android:text="По дню рождения"
+            android:textSize="16sp" />
+
+    </RadioGroup>
 
 </LinearLayout>

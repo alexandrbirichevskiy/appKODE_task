@@ -17,6 +17,18 @@ class UsersViewModel(private val usersItems: UsersItemsRepo) : ViewModel() {
     val users: LiveData<List<UserItemEntity>>
         get() = _users
 
+    fun sortUsersBirth(){
+        _users.value = users.value?.sortedBy {
+            it.birthday
+        }
+    }
+
+    fun sortUsersAlpha(){
+        _users.value = users.value?.sortedBy {
+            it.firstName
+        }
+    }
+
     fun getUsers() {
         usersItems.getUsersItems({
             _users.value = it

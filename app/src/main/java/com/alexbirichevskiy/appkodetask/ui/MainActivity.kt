@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import com.alexbirichevskiy.appkodetask.Consts.tabName
 import com.alexbirichevskiy.appkodetask.R
@@ -56,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
         val searchView = item.actionView as android.widget.SearchView
         searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -76,10 +77,25 @@ class MainActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.bottom_sheet)
         dialog.show()
-        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes!!.windowAnimations = R.style.bottom_sheet_animation
         dialog.window?.setGravity(Gravity.BOTTOM)
+
+        val sortAlphaRadioButton = dialog.findViewById<RadioButton>(R.id.sort_alpha_radio_button)
+        val sortBirthRadioButton = dialog.findViewById<RadioButton>(R.id.sort_birth_radio_button)
+
+        sortAlphaRadioButton.setOnClickListener {
+            usersVM.sortUsersAlpha()
+        }
+
+        sortBirthRadioButton.setOnClickListener {
+            usersVM.sortUsersBirth()
+        }
+        
         return true
     }
 }
